@@ -103,7 +103,7 @@ function renderLogin(sentTo) {
       if (error) { toast("That code didn't work. Check it or request a new one."); $("verify").disabled = false; }
     };
     $("verify").onclick = go;
-    $("code").onkeydown = (e) => e.key === "Enter" && go();
+    $("code").onkeydown = (e) => { if (e.key === "Enter") go(); };
   } else {
     const send = async () => {
       const email = $("email").value.trim().toLowerCase();
@@ -114,7 +114,7 @@ function renderLogin(sentTo) {
       renderLogin(email);
     };
     $("send").onclick = send;
-    $("code").onkeydown = (e) => { if (e.key === "Enter") go(); };
+    $("email").onkeydown = (e) => { if (e.key === "Enter") send(); };
   }
 }
 
