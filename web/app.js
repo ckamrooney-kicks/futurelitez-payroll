@@ -114,7 +114,7 @@ function renderLogin(sentTo) {
       renderLogin(email);
     };
     $("send").onclick = send;
-    $("email").onkeydown = (e) => e.key === "Enter" && send();
+    $("code").onkeydown = (e) => { if (e.key === "Enter") go(); };
   }
 }
 
