@@ -1,0 +1,6 @@
+// Fill these in from Supabase → Project Settings → API.
+// The anon / publishable key is designed to be public; your data is protected by the database rules.
+window.PAYROLL_CONFIG = {
+  SUPABASE_URL: "https://jbytrkonczgfmnwidnbs.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpieXRya29uY3pnZm1ud2lkbmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNTY3MjAsImV4cCI6MjEwNjYzMjcyMH0.b7rebSn2aORvqGqIARTSJnrcwlWpagcjCWZy8hN9WSg",
+};

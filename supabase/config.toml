@@ -1,0 +1,7 @@
+project_id = "futurelitez-payroll"
+
+[functions.submit-timesheet]
+verify_jwt = true
+
+[functions.timesheet-pdf]
+verify_jwt = true
