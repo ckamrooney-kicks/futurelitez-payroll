@@ -28,12 +28,13 @@ function store(k, v) {
 
 /* ── Pay periods: 21st → 20th, paid on the 1st of the next month ── */
 export function periodFor(endY, endM) {
-  const end = new Date(endY, endM, 20), start = new Date(endY, endM - 1, 21), pay = new Date(endY, endM + 1, 1);
+  const end = new Date(endY, endM + 1, -1), start = new Date(endY, endM, 0), pay = new Date(endY, endM + 1, 1);
   return { key: `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, "0")}`, start, end, pay,
     label: `${fmtShort(start)} – ${fmtShort(end)}, ${end.getFullYear()}` };
 }
 export function currentPeriod(today = new Date()) {
-  return today.getDate() > 20 ? periodFor(today.getFullYear(), today.getMonth() + 1) : periodFor(today.getFullYear(), today.getMonth());
+  const thisMonth = periodFor(today.getFullYear(), today.getMonth());
+  return today.getDate() > thisMonth.end.getDate() ? periodFor(today.getFullYear(), today.getMonth() + 1) : thisMonth;
 }
 export const periodByKey = (k) => { const [y, m] = k.split("-").map(Number); return periodFor(y, m - 1); };
 function periodOptions(back = 6) {
