@@ -1,1 +1,29 @@
+name: Payroll reminders
 
+on:
+  schedule:
+    - cron: "7 13 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Send now even if it's not reminder day (for testing)"
+        type: boolean
+        default: false
+      only:
+        description: "Only send to this email (for testing). Leave blank for everyone."
+        required: false
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send reminders
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          SECRET: ${{ secrets.REMINDER_SECRET }}
+          FORCE: ${{ inputs.force && '1' || '0' }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          curl -fsS -X POST "$URL/functions/v1/send-reminders?force=$FORCE&only=$ONLY" \
+            -H "x-reminder-secret: $SECRET"
+          echo
